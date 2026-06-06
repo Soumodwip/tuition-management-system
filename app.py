@@ -15,16 +15,44 @@ db = mysql.connector.connect(
     port=int(os.getenv("MYSQLPORT")),
     database=os.getenv("MYSQLDATABASE")
 )
+#admin login
+@app.route("/admin-login", methods=["GET", "POST"])
+def admin_login():
 
+    if request.method == "POST":
+
+        username = request.form["username"]
+        password = request.form["password"]
+
+        cursor = db.cursor()
+
+        cursor.execute(
+            """
+            SELECT * FROM admins
+            WHERE username=%s AND password=%s
+            """,
+            (username, password)
+        )
+
+        admin = cursor.fetchone()
+
+        if admin:
+            session["admin"] = True
+            return redirect("/dashboard")
+
+    return render_template("login.html")
 # Home Route
 @app.route("/")
 def home():
-    return redirect("/dashboard")
+    return redirect("/admin-login")
 
 
 # Dashboard
 @app.route("/dashboard")
 def dashboard():
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
 
     cursor = db.cursor()
 
@@ -52,6 +80,9 @@ def dashboard():
 # View Students
 @app.route("/students")
 def students():
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
 
     cursor = db.cursor()
 
@@ -84,6 +115,9 @@ def students():
 # Add Student
 @app.route("/add-student", methods=["GET", "POST"])
 def add_student():
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
 
     if request.method == "POST":
 
@@ -123,6 +157,8 @@ def add_student():
 @app.route("/edit-student/<int:id>", methods=["GET", "POST"])
 def edit_student(id):
 
+    if not session.get("admin"):
+        return redirect("/admin-login")
     cursor = db.cursor()
 
     if request.method == "POST":
@@ -171,6 +207,9 @@ def edit_student(id):
 # Delete Student
 @app.route("/delete-student/<int:id>")
 def delete_student(id):
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
 
     cursor = db.cursor()
 
@@ -314,6 +353,8 @@ def my_payments():
 @app.route("/verify-payments")
 def verify_payments():
 
+    if not session.get("admin"):
+        return redirect("/admin-login")
     cursor = db.cursor()
 
     cursor.execute("""
@@ -344,6 +385,9 @@ def verify_payments():
 @app.route("/verify/<int:payment_id>")
 def verify(payment_id):
 
+    if not session.get("admin"):
+        return redirect("/admin-login")
+
     cursor = db.cursor()
 
     cursor.execute(
@@ -362,6 +406,9 @@ def verify(payment_id):
 #payment report
 @app.route("/payment-report")
 def payment_report():
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
 
     cursor = db.cursor()
 
@@ -391,7 +438,7 @@ def logout():
 
     session.clear()
 
-    return redirect("/student-login")
+    return redirect("/admin-login")
 
 
 # Run Flask App

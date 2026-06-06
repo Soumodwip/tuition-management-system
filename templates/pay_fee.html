@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,32 +7,73 @@
 
 <body class="bg-gray-100">
 
+<!-- Navbar -->
+<div class="bg-blue-700 text-white p-4 flex justify-between">
+
+    <h1 class="font-bold text-xl">
+        Student Portal
+    </h1>
+
+    <div class="flex gap-4">
+
+        <a href="/student-dashboard"
+           class="bg-green-600 px-4 py-2 rounded">
+            Dashboard
+        </a>
+
+        <a href="/my-payments"
+           class="bg-purple-600 px-4 py-2 rounded">
+            My Payments
+        </a>
+
+        <a href="/logout"
+           class="bg-red-600 px-4 py-2 rounded">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
 <div class="max-w-lg mx-auto mt-10 bg-white p-8 rounded shadow">
 
-    <h1 class="text-3xl font-bold mb-6">
+    <h1 class="text-3xl font-bold mb-2">
         Submit Fee Payment
     </h1>
 
+    <p class="text-gray-600 mb-6">
+        Fill the details below and submit your payment request.
+    </p>
+
     <form method="POST">
+
+        <label class="font-semibold">
+            Amount
+        </label>
 
         <input
             type="number"
             name="amount"
-            placeholder="Amount"
+            placeholder="Enter Amount"
             class="w-full border p-3 mb-4 rounded"
             required
         >
+
+        <label class="font-semibold">
+            Payment Month
+        </label>
 
         <input
             type="text"
             name="payment_month"
-            placeholder="Month (Example: June 2026)"
-            class="w-full border p-3 mb-4 rounded"
+            placeholder="Example: June 2026"
+            class="w-full border p-3 mb-6 rounded"
             required
         >
 
         <button
-            class="w-full bg-green-600 text-white p-3 rounded">
+            type="submit"
+            class="w-full bg-green-600 text-white p-3 rounded text-lg">
             Mark as Paid
         </button>
 

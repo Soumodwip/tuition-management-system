@@ -5,43 +5,87 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 p-10">
+<body class="bg-gray-100">
 
-<h1 class="text-3xl font-bold mb-6">
-    Verify Payments
-</h1>
+<!-- Admin Navbar -->
+<div class="bg-gray-900 text-white p-4 flex justify-between">
 
-<table class="w-full bg-white shadow">
+    <div class="flex gap-6">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/students">Students</a>
+        <a href="/payment-report">Payment Report</a>
+    </div>
 
-<tr class="bg-red-600 text-white">
-    <th class="p-3">Payment ID</th>
-    <th class="p-3">Student ID</th>
-    <th class="p-3">Amount</th>
-    <th class="p-3">Month</th>
-    <th class="p-3">Status</th>
-    <th class="p-3">Action</th>
-</tr>
-
-{% for payment in payments %}
-<tr class="border-b">
-
-    <td class="p-3">{{ payment[0] }}</td>
-    <td class="p-3">{{ payment[1] }}</td>
-    <td class="p-3">{{ payment[2] }}</td>
-    <td class="p-3">{{ payment[3] }}</td>
-    <td class="p-3">{{ payment[4] }}</td>
-
-    <td class="p-3">
-        <a href="/verify/{{ payment[0] }}"
-           class="bg-green-600 text-white px-4 py-2 rounded">
-           Verify
+    <div>
+        <a href="/logout"
+           class="bg-red-600 px-4 py-2 rounded">
+            Logout
         </a>
-    </td>
+    </div>
 
-</tr>
-{% endfor %}
+</div>
 
-</table>
+<div class="p-10">
+
+    <h1 class="text-3xl font-bold mb-6">
+        Verify Payments
+    </h1>
+
+    <div class="bg-white rounded shadow overflow-hidden">
+
+        <table class="w-full">
+
+            <tr class="bg-red-600 text-white">
+                <th class="p-4 text-left">Payment ID</th>
+                <th class="p-4 text-left">Student Name</th>
+                <th class="p-4 text-left">Amount</th>
+                <th class="p-4 text-left">Month</th>
+                <th class="p-4 text-left">Status</th>
+                <th class="p-4 text-left">Action</th>
+            </tr>
+
+            {% for payment in payments %}
+            <tr class="border-b">
+
+                <td class="p-4">
+                    {{ payment[0] }}
+                </td>
+
+                <td class="p-4">
+                    {{ payment[1] }}
+                </td>
+
+                <td class="p-4">
+                    ₹ {{ payment[2] }}
+                </td>
+
+                <td class="p-4">
+                    {{ payment[3] }}
+                </td>
+
+                <td class="p-4">
+                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
+                        Pending
+                    </span>
+                </td>
+
+                <td class="p-4">
+
+                    <a href="/verify/{{ payment[0] }}"
+                       class="bg-green-600 text-white px-4 py-2 rounded">
+                        Verify
+                    </a>
+
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
 
 </body>
 </html>

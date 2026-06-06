@@ -1,85 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Students</title>
+    <title>Students Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 p-10">
+<body class="bg-gray-100">
 
-<!-- Navigation Bar -->
-<div class="bg-gray-900 text-white p-4 mb-5 flex gap-6">
-    <a href="/dashboard">Dashboard</a>
-    <a href="/students">Students</a>
-    <a href="/add-student">Add Student</a>
-    <a href="/verify-payments">Verify Payments</a>
+<!-- Admin Navbar -->
+<div class="bg-gray-900 text-white p-4 flex justify-between">
+
+    <div class="flex gap-6">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/students">Students</a>
+        <a href="/add-student">Add Student</a>
+        <a href="/verify-payments">Verify Payments</a>
+        <a href="/payment-report">Payment Report</a>
+    </div>
+
+    <div>
+        <a href="/logout"
+           class="bg-red-600 px-4 py-2 rounded">
+            Logout
+        </a>
+    </div>
+
 </div>
 
-<h1 class="text-3xl font-bold mb-6">
-    Student List
-</h1>
+<div class="p-10">
 
-<!-- Search Form -->
-<form method="GET" class="mb-5">
+    <h1 class="text-3xl font-bold mb-6">
+        Student Management
+    </h1>
 
-    <input
-        type="text"
-        name="search"
-        placeholder="Search Student Name"
-        class="border p-3 rounded w-72">
+    <!-- Search -->
+    <form method="GET" class="mb-6 flex gap-3">
 
-    <button
-        class="bg-blue-600 text-white px-4 py-3 rounded">
-        Search
-    </button>
+        <input
+            type="text"
+            name="search"
+            placeholder="Search Student Name"
+            class="border p-3 rounded w-80">
 
-</form>
+        <button
+            class="bg-blue-600 text-white px-5 py-3 rounded">
+            Search
+        </button>
 
-<table class="w-full bg-white shadow rounded">
+    </form>
 
-    <tr class="bg-blue-600 text-white">
+    <!-- Students Table -->
+    <div class="bg-white rounded shadow overflow-hidden">
 
-        <th class="p-3">ID</th>
-        <th class="p-3">Name</th>
-        <th class="p-3">Class</th>
-        <th class="p-3">Phone</th>
-        <th class="p-3">Email</th>
-        <th class="p-3">Actions</th>
+        <table class="w-full">
 
-    </tr>
+            <tr class="bg-blue-600 text-white">
 
-    {% for student in students %}
+                <th class="p-4 text-left">ID</th>
+                <th class="p-4 text-left">Name</th>
+                <th class="p-4 text-left">Class</th>
+                <th class="p-4 text-left">Phone</th>
+                <th class="p-4 text-left">Email</th>
+                <th class="p-4 text-left">Actions</th>
 
-    <tr class="border-b hover:bg-gray-100">
+            </tr>
 
-        <td class="p-3">{{ student[0] }}</td>
-        <td class="p-3">{{ student[1] }}</td>
-        <td class="p-3">{{ student[2] }}</td>
-        <td class="p-3">{{ student[3] }}</td>
-        <td class="p-3">{{ student[4] }}</td>
+            {% for student in students %}
 
-        <td class="p-3">
+            <tr class="border-b hover:bg-gray-100">
 
-            <a
-                href="/edit-student/{{ student[0] }}"
-                class="bg-yellow-500 text-white px-3 py-2 rounded">
-                Edit
-            </a>
+                <td class="p-4">{{ student[0] }}</td>
+                <td class="p-4">{{ student[1] }}</td>
+                <td class="p-4">{{ student[2] }}</td>
+                <td class="p-4">{{ student[3] }}</td>
+                <td class="p-4">{{ student[4] }}</td>
 
-            <a
-                href="/delete-student/{{ student[0] }}"
-                onclick="return confirm('Are you sure you want to delete this student?')"
-                class="bg-red-600 text-white px-3 py-2 rounded ml-2">
-                Delete
-            </a>
+                <td class="p-4">
 
-        </td>
+                    <a href="/edit-student/{{ student[0] }}"
+                       class="bg-yellow-500 text-white px-3 py-2 rounded">
+                        Edit
+                    </a>
 
-    </tr>
+                    <a href="/delete-student/{{ student[0] }}"
+                       onclick="return confirm('Are you sure you want to delete this student?')"
+                       class="bg-red-600 text-white px-3 py-2 rounded ml-2">
+                        Delete
+                    </a>
 
-    {% endfor %}
+                </td>
 
-</table>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
 
 </body>
 </html>

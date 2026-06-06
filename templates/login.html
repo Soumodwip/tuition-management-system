@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tuition Management System</title>
+    <title>Admin Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -10,24 +10,29 @@
     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
 
         <h1 class="text-2xl font-bold text-center mb-6">
-            Tuition Management System
+            Admin Login
         </h1>
 
-        <form>
+        <form method="POST">
 
             <input
                 type="text"
+                name="username"
                 placeholder="Username"
                 class="w-full border p-3 mb-4 rounded"
+                required
             >
 
             <input
                 type="password"
+                name="password"
                 placeholder="Password"
                 class="w-full border p-3 mb-4 rounded"
+                required
             >
 
             <button
+                type="submit"
                 class="w-full bg-blue-600 text-white p-3 rounded"
             >
                 Login
