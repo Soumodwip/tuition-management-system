@@ -5,11 +5,15 @@ app = Flask(__name__)
 app.secret_key = "tuition_secret_key"
 
 # Database Connection
+import os
+import mysql.connector
+
 db = mysql.connector.connect(
-    host="localhost",
-    user="tuition",
-    password="tuition123",
-    database="tuition_management"
+    host=os.getenv("MYSQLHOST"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD"),
+    port=int(os.getenv("MYSQLPORT")),
+    database=os.getenv("MYSQLDATABASE")
 )
 
 # Home Route
