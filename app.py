@@ -44,7 +44,7 @@ def admin_login():
 # Home Route
 @app.route("/")
 def home():
-    return redirect("/admin-login")
+    return render_template("home.html")
 
 
 # Dashboard
