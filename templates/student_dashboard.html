@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Student Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100">
+    <div class="max-w-5xl mx-auto mt-10">
+      <div class="bg-white p-8 rounded shadow">
+        <h1 class="text-3xl font-bold mb-6">Welcome, {{ student[1] }}</h1>
+
+        <p><strong>Class:</strong> {{ student[2] }}</p>
+        <p><strong>Phone:</strong> {{ student[3] }}</p>
+        <p><strong>Email:</strong> {{ student[4] }}</p>
+
+        <div class="mt-6 flex gap-4">
+          <a href="/pay-fee" class="bg-green-600 text-white px-5 py-3 rounded">
+            Pay Fee
+          </a>
+
+          <a
+            href="/my-payments"
+            class="bg-blue-600 text-white px-5 py-3 rounded"
+          >
+            My Payments
+          </a>
+
+          <a href="/logout" class="bg-red-600 text-white px-5 py-3 rounded">
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

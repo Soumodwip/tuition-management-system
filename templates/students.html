@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-10">
+
+<!-- Navigation Bar -->
+<div class="bg-gray-900 text-white p-4 mb-5 flex gap-6">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/students">Students</a>
+    <a href="/add-student">Add Student</a>
+    <a href="/verify-payments">Verify Payments</a>
+</div>
+
+<h1 class="text-3xl font-bold mb-6">
+    Student List
+</h1>
+
+<!-- Search Form -->
+<form method="GET" class="mb-5">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search Student Name"
+        class="border p-3 rounded w-72">
+
+    <button
+        class="bg-blue-600 text-white px-4 py-3 rounded">
+        Search
+    </button>
+
+</form>
+
+<table class="w-full bg-white shadow rounded">
+
+    <tr class="bg-blue-600 text-white">
+
+        <th class="p-3">ID</th>
+        <th class="p-3">Name</th>
+        <th class="p-3">Class</th>
+        <th class="p-3">Phone</th>
+        <th class="p-3">Email</th>
+        <th class="p-3">Actions</th>
+
+    </tr>
+
+    {% for student in students %}
+
+    <tr class="border-b hover:bg-gray-100">
+
+        <td class="p-3">{{ student[0] }}</td>
+        <td class="p-3">{{ student[1] }}</td>
+        <td class="p-3">{{ student[2] }}</td>
+        <td class="p-3">{{ student[3] }}</td>
+        <td class="p-3">{{ student[4] }}</td>
+
+        <td class="p-3">
+
+            <a
+                href="/edit-student/{{ student[0] }}"
+                class="bg-yellow-500 text-white px-3 py-2 rounded">
+                Edit
+            </a>
+
+            <a
+                href="/delete-student/{{ student[0] }}"
+                onclick="return confirm('Are you sure you want to delete this student?')"
+                class="bg-red-600 text-white px-3 py-2 rounded ml-2">
+                Delete
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

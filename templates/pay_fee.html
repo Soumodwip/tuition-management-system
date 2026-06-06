@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pay Fee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="max-w-lg mx-auto mt-10 bg-white p-8 rounded shadow">
+
+    <h1 class="text-3xl font-bold mb-6">
+        Submit Fee Payment
+    </h1>
+
+    <form method="POST">
+
+        <input
+            type="number"
+            name="amount"
+            placeholder="Amount"
+            class="w-full border p-3 mb-4 rounded"
+            required
+        >
+
+        <input
+            type="text"
+            name="payment_month"
+            placeholder="Month (Example: June 2026)"
+            class="w-full border p-3 mb-4 rounded"
+            required
+        >
+
+        <button
+            class="w-full bg-green-600 text-white p-3 rounded">
+            Mark as Paid
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

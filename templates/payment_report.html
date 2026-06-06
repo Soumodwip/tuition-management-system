@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+
+<h1 class="text-3xl font-bold mb-6">
+Payment Report
+</h1>
+
+<table class="w-full bg-white shadow">
+
+<tr class="bg-green-600 text-white">
+    <th class="p-3">Student</th>
+    <th class="p-3">Amount</th>
+    <th class="p-3">Month</th>
+    <th class="p-3">Status</th>
+</tr>
+
+{% for payment in payments %}
+
+<tr>
+    <td class="p-3">{{ payment[1] }}</td>
+    <td class="p-3">{{ payment[2] }}</td>
+    <td class="p-3">{{ payment[3] }}</td>
+    <td class="p-3">{{ payment[4] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>
