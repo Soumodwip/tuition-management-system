@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Attendance</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<div class="bg-blue-700 text-white p-4">
+
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
+
+        <h1 class="font-bold text-xl">
+            Student Portal
+        </h1>
+
+        <div class="flex flex-wrap gap-3">
+
+            <a href="/student-dashboard"
+               class="bg-green-600 px-4 py-2 rounded">
+                Dashboard
+            </a>
+
+            <a href="/logout"
+               class="bg-red-600 px-4 py-2 rounded">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="max-w-5xl mx-auto p-4 md:p-8">
+
+    <h1 class="text-3xl font-bold mb-6">
+        My Attendance
+    </h1>
+
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+
+        <table class="w-full">
+
+            <tr class="bg-blue-600 text-white">
+
+                <th class="p-4 text-left">
+                    Date
+                </th>
+
+                <th class="p-4 text-left">
+                    Status
+                </th>
+
+            </tr>
+
+            {% for a in attendance %}
+
+            <tr class="border-b">
+
+                <td class="p-4">
+                    {{ a[0] }}
+                </td>
+
+                <td class="p-4">
+
+                    {% if a[1] == "Present" %}
+
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                        Present
+                    </span>
+
+                    {% elif a[1] == "Absent" %}
+
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                        Absent
+                    </span>
+
+                    {% else %}
+
+                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
+                        Late
+                    </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

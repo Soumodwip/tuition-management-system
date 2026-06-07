@@ -524,6 +524,79 @@ def delete_announcement(id):
 
     return redirect("/announcements") 
 
+# Attendance Page (Admin)
+@app.route("/attendance")
+def attendance():
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
+
+    cursor = db.cursor()
+
+    cursor.execute("SELECT * FROM students")
+
+    students = cursor.fetchall()
+
+    return render_template(
+        "attendance.html",
+        students=students
+    )
+
+
+# Mark Attendance
+@app.route("/mark-attendance", methods=["POST"])
+def mark_attendance():
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
+
+    student_id = request.form["student_id"]
+    status = request.form["status"]
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO attendance
+        (student_id, attendance_date, status)
+        VALUES (%s, CURDATE(), %s)
+        """,
+        (student_id, status)
+    )
+
+    db.commit()
+
+    return redirect("/attendance")
+
+
+# Student Attendance
+@app.route("/student-attendance")
+def student_attendance():
+
+    if "student_id" not in session:
+        return redirect("/student-login")
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        """
+        SELECT attendance_date, status
+        FROM attendance
+        WHERE student_id=%s
+        ORDER BY attendance_date DESC
+        """,
+        (session["student_id"],)
+    )
+
+    attendance = cursor.fetchall()
+
+    return render_template(
+        "student_attendance.html",
+        attendance=attendance
+    )
+
+
+
 #debugg route
 @app.route("/show-admin")
 def show_admin():
@@ -546,6 +619,3 @@ def logout():
 # Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-#This is python
