@@ -524,6 +524,16 @@ def delete_announcement(id):
 
     return redirect("/announcements") 
 
+#debugg route
+@app.route("/show-admin")
+def show_admin():
+
+    cursor = db.cursor()
+
+    cursor.execute("SELECT * FROM admins")
+
+    return str(cursor.fetchall())
+
 # Logout
 @app.route("/logout")
 def logout():
