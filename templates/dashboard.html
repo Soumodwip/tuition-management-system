@@ -1,16 +1,27 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Admin Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
 </head>
 
 <body class="bg-gray-100">
 
 <!-- Navigation Bar -->
-<div class="bg-gray-900 text-white p-4 flex justify-between items-center">
 
-    <div class="flex gap-6">
+<div class="bg-gray-900 text-white p-4">
+
+```
+<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+
+    <div class="flex flex-wrap gap-4 text-sm md:text-base">
         <a href="/dashboard">Dashboard</a>
         <a href="/students">Students</a>
         <a href="/add-student">Add Student</a>
@@ -18,7 +29,7 @@
         <a href="/payment-report">Payment Report</a>
     </div>
 
-    <div class="flex gap-4 items-center">
+    <div class="flex flex-wrap gap-3 items-center">
         <span class="text-green-400 font-bold">
             Admin Panel
         </span>
@@ -30,72 +41,77 @@
     </div>
 
 </div>
+```
 
-<div class="p-10">
+</div>
 
-    <h1 class="text-4xl font-bold mb-8">
-        Tuition Management Dashboard
-    </h1>
+<div class="p-4 md:p-10">
 
-    <!-- Statistics Cards -->
-    <div class="grid grid-cols-3 gap-6 mb-10">
+```
+<h1 class="text-2xl md:text-4xl font-bold mb-8">
+    Tuition Management Dashboard
+</h1>
 
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-xl font-bold">
-                Total Students
-            </h2>
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
 
-            <p class="text-4xl mt-3 text-blue-600">
-                {{ total_students }}
-            </p>
-        </div>
+    <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-bold">
+            Total Students
+        </h2>
 
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-xl font-bold">
-                Total Payments
-            </h2>
-
-            <p class="text-4xl mt-3 text-green-600">
-                {{ total_payments }}
-            </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-xl font-bold">
-                Pending Payments
-            </h2>
-
-            <p class="text-4xl mt-3 text-red-600">
-                {{ pending_payments }}
-            </p>
-        </div>
-
+        <p class="text-3xl md:text-4xl mt-3 text-blue-600">
+            {{ total_students }}
+        </p>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="grid grid-cols-2 gap-6">
+    <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-bold">
+            Total Payments
+        </h2>
 
-        <a href="/students"
-           class="bg-blue-600 text-white p-6 rounded-lg text-center text-xl">
-            View Students
-        </a>
-
-        <a href="/add-student"
-           class="bg-green-600 text-white p-6 rounded-lg text-center text-xl">
-            Add Student
-        </a>
-
-        <a href="/verify-payments"
-           class="bg-red-600 text-white p-6 rounded-lg text-center text-xl">
-            Verify Payments
-        </a>
-
-        <a href="/payment-report"
-           class="bg-purple-600 text-white p-6 rounded-lg text-center text-xl">
-            Payment Report
-        </a>
-
+        <p class="text-3xl md:text-4xl mt-3 text-green-600">
+            {{ total_payments }}
+        </p>
     </div>
+
+    <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-bold">
+            Pending Payments
+        </h2>
+
+        <p class="text-3xl md:text-4xl mt-3 text-red-600">
+            {{ pending_payments }}
+        </p>
+    </div>
+
+</div>
+
+<!-- Action Buttons -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <a href="/students"
+       class="bg-blue-600 text-white p-6 rounded-lg text-center text-lg md:text-xl">
+        View Students
+    </a>
+
+    <a href="/add-student"
+       class="bg-green-600 text-white p-6 rounded-lg text-center text-lg md:text-xl">
+        Add Student
+    </a>
+
+    <a href="/verify-payments"
+       class="bg-red-600 text-white p-6 rounded-lg text-center text-lg md:text-xl">
+        Verify Payments
+    </a>
+
+    <a href="/payment-report"
+       class="bg-purple-600 text-white p-6 rounded-lg text-center text-lg md:text-xl">
+        Payment Report
+    </a>
+
+</div>
+```
 
 </div>
 

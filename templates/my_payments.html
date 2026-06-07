@@ -1,20 +1,31 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>My Payments</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
 </head>
 
 <body class="bg-gray-100">
 
 <!-- Navbar -->
-<div class="bg-blue-700 text-white p-4 flex justify-between">
+
+<div class="bg-blue-700 text-white p-4">
+
+```
+<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
 
     <h1 class="font-bold text-xl">
         Student Portal
     </h1>
 
-    <div class="flex gap-4">
+    <div class="flex flex-wrap gap-3">
 
         <a href="/student-dashboard"
            class="bg-green-600 px-4 py-2 rounded">
@@ -29,58 +40,63 @@
     </div>
 
 </div>
+```
 
-<div class="p-10">
+</div>
 
-    <h1 class="text-3xl font-bold mb-6">
-        My Payments
-    </h1>
+<div class="p-4 md:p-10">
 
-    <div class="bg-white rounded shadow overflow-hidden">
+```
+<h1 class="text-2xl md:text-3xl font-bold mb-6">
+    My Payments
+</h1>
 
-        <table class="w-full">
+<div class="bg-white rounded shadow overflow-x-auto">
 
-            <tr class="bg-blue-600 text-white">
-                <th class="p-4 text-left">Month</th>
-                <th class="p-4 text-left">Amount</th>
-                <th class="p-4 text-left">Status</th>
-            </tr>
+    <table class="w-full min-w-[500px]">
 
-            {% for payment in payments %}
-            <tr class="border-b">
+        <tr class="bg-blue-600 text-white">
+            <th class="p-4 text-left">Month</th>
+            <th class="p-4 text-left">Amount</th>
+            <th class="p-4 text-left">Status</th>
+        </tr>
 
-                <td class="p-4">
-                    {{ payment[3] }}
-                </td>
+        {% for payment in payments %}
+        <tr class="border-b hover:bg-gray-50">
 
-                <td class="p-4">
-                    ₹ {{ payment[2] }}
-                </td>
+            <td class="p-4">
+                {{ payment[3] }}
+            </td>
 
-                <td class="p-4">
+            <td class="p-4">
+                ₹ {{ payment[2] }}
+            </td>
 
-                    {% if payment[4] == "Verified" %}
+            <td class="p-4">
 
-                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
-                        Verified
-                    </span>
+                {% if payment[4] == "Verified" %}
 
-                    {% else %}
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                    Verified
+                </span>
 
-                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full">
-                        Pending
-                    </span>
+                {% else %}
 
-                    {% endif %}
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                    Pending
+                </span>
 
-                </td>
+                {% endif %}
 
-            </tr>
-            {% endfor %}
+            </td>
 
-        </table>
+        </tr>
+        {% endfor %}
 
-    </div>
+    </table>
+
+</div>
+```
 
 </div>
 

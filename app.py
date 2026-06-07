@@ -233,6 +233,8 @@ def delete_student(id):
 @app.route("/student-login", methods=["GET", "POST"])
 def student_login():
 
+    error = None
+
     if request.method == "POST":
 
         username = request.form["username"]
@@ -256,9 +258,14 @@ def student_login():
 
             return redirect("/student-dashboard")
 
-    return render_template("student_login.html")
+        else:
 
+            error = "Username or Password is incorrect"
 
+    return render_template(
+        "student_login.html",
+        error=error
+    )
 # Student Dashboard
 @app.route("/student-dashboard")
 def student_dashboard():

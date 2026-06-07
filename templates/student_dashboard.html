@@ -1,36 +1,85 @@
 <!doctype html>
+
 <html>
-  <head>
+<head>
     <title>Student Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
 
-  <body class="bg-gray-100">
-    <div class="max-w-5xl mx-auto mt-10">
-      <div class="bg-white p-8 rounded shadow">
-        <h1 class="text-3xl font-bold mb-6">Welcome, {{ student[1] }}</h1>
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <p><strong>Class:</strong> {{ student[2] }}</p>
-        <p><strong>Phone:</strong> {{ student[3] }}</p>
-        <p><strong>Email:</strong> {{ student[4] }}</p>
+<script src="https://cdn.tailwindcss.com"></script>
+```
 
-        <div class="mt-6 flex gap-4">
-          <a href="/pay-fee" class="bg-green-600 text-white px-5 py-3 rounded">
-            Pay Fee
-          </a>
+</head>
 
-          <a
-            href="/my-payments"
-            class="bg-blue-600 text-white px-5 py-3 rounded"
-          >
-            My Payments
-          </a>
+<body class="bg-gray-100">
 
-          <a href="/logout" class="bg-red-600 text-white px-5 py-3 rounded">
+```
+<!-- Navbar -->
+<div class="bg-blue-700 text-white p-4">
+
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
+
+        <h1 class="font-bold text-xl">
+            Student Portal
+        </h1>
+
+        <a href="/logout"
+           class="bg-red-600 px-4 py-2 rounded text-center">
             Logout
-          </a>
-        </div>
-      </div>
+        </a>
+
     </div>
-  </body>
+
+</div>
+
+<div class="max-w-5xl mx-auto mt-6 md:mt-10 px-4">
+
+    <div class="bg-white p-6 md:p-8 rounded shadow">
+
+        <h1 class="text-2xl md:text-3xl font-bold mb-6">
+            Welcome, {{ student[1] }}
+        </h1>
+
+        <div class="space-y-3 text-base md:text-lg">
+
+            <p>
+                <strong>Class:</strong> {{ student[2] }}
+            </p>
+
+            <p>
+                <strong>Phone:</strong> {{ student[3] }}
+            </p>
+
+            <p>
+                <strong>Email:</strong> {{ student[4] }}
+            </p>
+
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+            <a href="/pay-fee"
+               class="bg-green-600 text-white p-4 rounded text-center">
+                Pay Fee
+            </a>
+
+            <a href="/my-payments"
+               class="bg-blue-600 text-white p-4 rounded text-center">
+                My Payments
+            </a>
+
+            <a href="/logout"
+               class="bg-red-600 text-white p-4 rounded text-center">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</body>
 </html>

@@ -1,16 +1,27 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Students Management</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
 </head>
 
 <body class="bg-gray-100">
 
 <!-- Admin Navbar -->
-<div class="bg-gray-900 text-white p-4 flex justify-between">
 
-    <div class="flex gap-6">
+<div class="bg-gray-900 text-white p-4">
+
+```
+<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+
+    <div class="flex flex-wrap gap-4 text-sm md:text-base">
         <a href="/dashboard">Dashboard</a>
         <a href="/students">Students</a>
         <a href="/add-student">Add Student</a>
@@ -26,56 +37,63 @@
     </div>
 
 </div>
+```
 
-<div class="p-10">
+</div>
 
-    <h1 class="text-3xl font-bold mb-6">
-        Student Management
-    </h1>
+<div class="p-4 md:p-10">
 
-    <!-- Search -->
-    <form method="GET" class="mb-6 flex gap-3">
+```
+<h1 class="text-2xl md:text-3xl font-bold mb-6">
+    Student Management
+</h1>
 
-        <input
-            type="text"
-            name="search"
-            placeholder="Search Student Name"
-            class="border p-3 rounded w-80">
+<!-- Search -->
+<form method="GET"
+      class="mb-6 flex flex-col md:flex-row gap-3">
 
-        <button
-            class="bg-blue-600 text-white px-5 py-3 rounded">
-            Search
-        </button>
+    <input
+        type="text"
+        name="search"
+        placeholder="Search Student Name"
+        class="border p-3 rounded w-full md:w-80">
 
-    </form>
+    <button
+        class="bg-blue-600 text-white px-5 py-3 rounded">
+        Search
+    </button>
 
-    <!-- Students Table -->
-    <div class="bg-white rounded shadow overflow-hidden">
+</form>
 
-        <table class="w-full">
+<!-- Students Table -->
+<div class="bg-white rounded shadow overflow-x-auto">
 
-            <tr class="bg-blue-600 text-white">
+    <table class="w-full min-w-[900px]">
 
-                <th class="p-4 text-left">ID</th>
-                <th class="p-4 text-left">Name</th>
-                <th class="p-4 text-left">Class</th>
-                <th class="p-4 text-left">Phone</th>
-                <th class="p-4 text-left">Email</th>
-                <th class="p-4 text-left">Actions</th>
+        <tr class="bg-blue-600 text-white">
 
-            </tr>
+            <th class="p-4 text-left">ID</th>
+            <th class="p-4 text-left">Name</th>
+            <th class="p-4 text-left">Class</th>
+            <th class="p-4 text-left">Phone</th>
+            <th class="p-4 text-left">Email</th>
+            <th class="p-4 text-left">Actions</th>
 
-            {% for student in students %}
+        </tr>
 
-            <tr class="border-b hover:bg-gray-100">
+        {% for student in students %}
 
-                <td class="p-4">{{ student[0] }}</td>
-                <td class="p-4">{{ student[1] }}</td>
-                <td class="p-4">{{ student[2] }}</td>
-                <td class="p-4">{{ student[3] }}</td>
-                <td class="p-4">{{ student[4] }}</td>
+        <tr class="border-b hover:bg-gray-100">
 
-                <td class="p-4">
+            <td class="p-4">{{ student[0] }}</td>
+            <td class="p-4">{{ student[1] }}</td>
+            <td class="p-4">{{ student[2] }}</td>
+            <td class="p-4">{{ student[3] }}</td>
+            <td class="p-4">{{ student[4] }}</td>
+
+            <td class="p-4">
+
+                <div class="flex flex-wrap gap-2">
 
                     <a href="/edit-student/{{ student[0] }}"
                        class="bg-yellow-500 text-white px-3 py-2 rounded">
@@ -84,19 +102,22 @@
 
                     <a href="/delete-student/{{ student[0] }}"
                        onclick="return confirm('Are you sure you want to delete this student?')"
-                       class="bg-red-600 text-white px-3 py-2 rounded ml-2">
+                       class="bg-red-600 text-white px-3 py-2 rounded">
                         Delete
                     </a>
 
-                </td>
+                </div>
 
-            </tr>
+            </td>
 
-            {% endfor %}
+        </tr>
 
-        </table>
+        {% endfor %}
 
-    </div>
+    </table>
+
+</div>
+```
 
 </div>
 

@@ -1,48 +1,95 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Student Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
 </head>
 
-<body class="bg-gray-100 flex justify-center items-center h-screen">
+<body class="bg-gray-100 flex justify-center items-center min-h-screen p-4">
 
-<div class="bg-white p-8 rounded shadow w-96">
+<div class="bg-white p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md">
 
-    <h1 class="text-3xl font-bold mb-6 text-center">
-        Student Login
-    </h1>
+```
+<h1 class="text-3xl font-bold mb-6 text-center">
+    Student Login
+</h1>
 
-    <form method="POST">
+{% if error %}
 
-        <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        class="w-full border p-3 mb-4 rounded"
-        required>
+<div id="errorPopup"
+     class="mb-5 bg-red-50 border border-red-500 text-red-700 rounded-lg p-4 shadow">
 
-        <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        class="w-full border p-3 mb-4 rounded"
-        required>
+    <div class="flex items-center gap-3">
 
-        <button
-        type="submit"
-        class="bg-blue-600 text-white w-full p-3 rounded">
-        Login
-        </button>
+        <div class="text-3xl">
+            ❌
+        </div>
 
-    </form>
+        <div>
+            <h3 class="font-bold">
+                Login Failed
+            </h3>
 
-    <div class="mt-4 text-center">
-        <a href="/admin-login"
-        class="text-blue-600">
-        Admin Login
-        </a>
+            <p>
+                Username or Password is incorrect.
+            </p>
+        </div>
+
     </div>
+
+</div>
+
+<script>
+setTimeout(function() {
+    const popup = document.getElementById("errorPopup");
+    if (popup) {
+        popup.style.display = "none";
+    }
+}, 4000);
+</script>
+
+{% endif %}
+
+<form method="POST">
+
+    <input
+    type="text"
+    name="username"
+    placeholder="Username"
+    class="w-full border p-3 mb-4 rounded"
+    required>
+
+    <input
+    type="password"
+    name="password"
+    placeholder="Password"
+    class="w-full border p-3 mb-4 rounded"
+    required>
+
+    <button
+    type="submit"
+    class="bg-blue-600 hover:bg-blue-700 text-white w-full p-3 rounded">
+    Login
+    </button>
+
+</form>
+
+<div class="mt-4 text-center">
+
+    <a href="/admin-login"
+    class="text-blue-600 font-semibold hover:underline">
+    Admin Login
+    </a>
+
+</div>
+```
 
 </div>
 
