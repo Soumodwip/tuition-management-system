@@ -445,7 +445,7 @@ def logout():
 
     session.clear()
 
-    return redirect("/admin-login")
+    return redirect("/")
 
 
 # Run Flask App
