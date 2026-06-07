@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Announcements</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<div class="bg-gray-900 text-white p-4">
+
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+
+        <div class="flex flex-wrap gap-4">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/students">Students</a>
+            <a href="/verify-payments">Verify Payments</a>
+            <a href="/payment-report">Payment Report</a>
+            <a href="/announcements">Announcements</a>
+        </div>
+
+        <div>
+            <a href="/logout"
+               class="bg-red-600 px-4 py-2 rounded">
+                Logout
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="max-w-5xl mx-auto p-4 md:p-8">
+
+    <h1 class="text-3xl font-bold mb-6">
+        📢 Manage Announcements
+    </h1>
+
+    <!-- Create Announcement -->
+    <div class="bg-white p-6 rounded-lg shadow mb-8">
+
+        <h2 class="text-xl font-bold mb-4">
+            Create New Announcement
+        </h2>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Announcement Title"
+                class="w-full border p-3 rounded mb-4"
+                required
+            >
+
+            <textarea
+                name="message"
+                placeholder="Write your announcement here..."
+                class="w-full border p-3 rounded mb-4 h-40"
+                required
+            ></textarea>
+
+            <button
+                type="submit"
+                class="bg-blue-600 text-white px-6 py-3 rounded">
+                Publish Announcement
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Announcement List -->
+    <h2 class="text-2xl font-bold mb-4">
+        Published Announcements
+    </h2>
+
+    {% if announcements %}
+
+        {% for a in announcements %}
+
+        <div class="bg-white p-5 rounded-lg shadow mb-4">
+
+            <h3 class="text-xl font-bold text-blue-700">
+                {{ a[1] }}
+            </h3>
+
+            <p class="mt-3 text-gray-700">
+                {{ a[2] }}
+            </p>
+
+            <p class="mt-4 text-sm text-gray-500">
+                Posted on: {{ a[3] }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="bg-white p-6 rounded-lg shadow text-center">
+
+            <h2 class="text-xl font-bold text-gray-600">
+                No Announcements Yet
+            </h2>
+
+            <p class="text-gray-500 mt-2">
+                Create your first announcement.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
