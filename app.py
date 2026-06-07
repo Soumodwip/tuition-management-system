@@ -439,6 +439,73 @@ def payment_report():
         "payment_report.html",
         payments=payments
     )
+
+# Admin Announcements
+@app.route("/announcements", methods=["GET", "POST"])
+def announcements():
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
+
+    cursor = db.cursor()
+
+    if request.method == "POST":
+
+        title = request.form["title"]
+        message = request.form["message"]
+
+        cursor.execute(
+            """
+            INSERT INTO announcements
+            (title, message)
+            VALUES (%s, %s)
+            """,
+            (title, message)
+        )
+
+        db.commit()
+
+        return redirect("/announcements")
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM announcements
+        ORDER BY id DESC
+        """
+    )
+
+    announcements = cursor.fetchall()
+
+    return render_template(
+        "announcements.html",
+        announcements=announcements
+    )
+
+
+# Student Announcements
+@app.route("/student-announcements")
+def student_announcements():
+
+    if "student_id" not in session:
+        return redirect("/student-login")
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM announcements
+        ORDER BY id DESC
+        """
+    )
+
+    announcements = cursor.fetchall()
+
+    return render_template(
+        "student_announcements.html",
+        announcements=announcements
+    )
 # Logout
 @app.route("/logout")
 def logout():

@@ -1,19 +1,14 @@
 <!doctype html>
-
 <html>
 <head>
     <title>Student Dashboard</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
-
 
 <!-- Navbar -->
 <div class="bg-blue-700 text-white p-4">
@@ -34,6 +29,19 @@
 </div>
 
 <div class="max-w-5xl mx-auto mt-6 md:mt-10 px-4">
+
+    <!-- Announcement Notice -->
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded mb-6">
+
+        <h2 class="font-bold text-yellow-800">
+            🔔 New Announcements Available
+        </h2>
+
+        <p class="text-yellow-700">
+            Check the announcements section for latest updates and notices.
+        </p>
+
+    </div>
 
     <div class="bg-white p-6 md:p-8 rounded shadow">
 
@@ -57,20 +65,26 @@
 
         </div>
 
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Action Buttons -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
             <a href="/pay-fee"
-               class="bg-green-600 text-white p-4 rounded text-center">
+               class="bg-green-600 text-white p-4 rounded text-center hover:bg-green-700">
                 Pay Fee
             </a>
 
             <a href="/my-payments"
-               class="bg-blue-600 text-white p-4 rounded text-center">
+               class="bg-blue-600 text-white p-4 rounded text-center hover:bg-blue-700">
                 My Payments
             </a>
 
+            <a href="/student-announcements"
+               class="bg-yellow-500 text-white p-4 rounded text-center hover:bg-yellow-600">
+                📢 Announcements
+            </a>
+
             <a href="/logout"
-               class="bg-red-600 text-white p-4 rounded text-center">
+               class="bg-red-600 text-white p-4 rounded text-center hover:bg-red-700">
                 Logout
             </a>
 
@@ -79,7 +93,6 @@
     </div>
 
 </div>
-
 
 </body>
 </html>
