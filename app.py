@@ -506,6 +506,24 @@ def student_announcements():
         "student_announcements.html",
         announcements=announcements
     )
+
+@app.route("/delete-announcement/<int:id>")
+def delete_announcement(id):
+
+    if not session.get("admin"):
+        return redirect("/admin-login")
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        "DELETE FROM announcements WHERE id=%s",
+        (id,)
+    )
+
+    db.commit()
+
+    return redirect("/announcements") 
+
 # Logout
 @app.route("/logout")
 def logout():
