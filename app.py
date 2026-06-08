@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 
@@ -128,13 +129,26 @@ def add_student():
         username = request.form["username"]
         password = request.form["password"]
 
+        # Attendance days from checkboxes
+        attendance_days = ",".join(
+            request.form.getlist("attendance_days")
+        )
+
         cursor = db.cursor()
 
         cursor.execute(
             """
             INSERT INTO students
-            (name, class_name, phone, email, username, password)
-            VALUES (%s,%s,%s,%s,%s,%s)
+            (
+                name,
+                class_name,
+                phone,
+                email,
+                username,
+                password,
+                attendance_days
+            )
+            VALUES (%s,%s,%s,%s,%s,%s,%s)
             """,
             (
                 name,
@@ -142,7 +156,8 @@ def add_student():
                 phone,
                 email,
                 username,
-                password
+                password,
+                attendance_days
             )
         )
 
@@ -151,14 +166,13 @@ def add_student():
         return redirect("/students")
 
     return render_template("add_student.html")
-
-
 # Edit Student
 @app.route("/edit-student/<int:id>", methods=["GET", "POST"])
 def edit_student(id):
 
     if not session.get("admin"):
         return redirect("/admin-login")
+
     cursor = db.cursor()
 
     if request.method == "POST":
@@ -168,6 +182,10 @@ def edit_student(id):
         phone = request.form["phone"]
         email = request.form["email"]
 
+        attendance_days = ",".join(
+            request.form.getlist("attendance_days")
+        )
+
         cursor.execute(
             """
             UPDATE students
@@ -175,7 +193,8 @@ def edit_student(id):
             name=%s,
             class_name=%s,
             phone=%s,
-            email=%s
+            email=%s,
+            attendance_days=%s
             WHERE id=%s
             """,
             (
@@ -183,6 +202,7 @@ def edit_student(id):
                 class_name,
                 phone,
                 email,
+                attendance_days,
                 id
             )
         )
@@ -525,15 +545,27 @@ def delete_announcement(id):
     return redirect("/announcements") 
 
 # Attendance Page (Admin)
+from datetime import datetime
+
 @app.route("/attendance")
 def attendance():
 
     if not session.get("admin"):
         return redirect("/admin-login")
 
+    # Get today's day
+    today = datetime.now().strftime("%a")
+
     cursor = db.cursor()
 
-    cursor.execute("SELECT * FROM students")
+    cursor.execute(
+        """
+        SELECT *
+        FROM students
+        WHERE attendance_days LIKE %s
+        """,
+        ('%' + today + '%',)
+    )
 
     students = cursor.fetchall()
 
