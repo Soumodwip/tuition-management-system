@@ -584,7 +584,6 @@ def attendance():
     if not session.get("admin"):
         return redirect("/admin-login")
 
-    # Get today's day
     today = datetime.now().strftime("%a")
 
     cursor = db.cursor()
@@ -600,17 +599,11 @@ def attendance():
 
     students = cursor.fetchall()
 
-    success_message = session.pop(
-        "success_message",
-        None
-    )
-
     return render_template(
         "attendance.html",
         students=students,
-        success_message=success_message
+        success_message="TEST MESSAGE FROM ATTENDANCE PAGE"
     )
-
 
 # Mark Attendance
 from datetime import datetime
