@@ -13,7 +13,7 @@
         Add Student
     </h1>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
 
         <input type="text" name="name"
             placeholder="Student Name"
@@ -44,6 +44,21 @@
             placeholder="Password"
             class="w-full border p-3 mb-3 rounded"
             required>
+
+        <!-- Profile Photo -->
+
+        <h3 class="font-bold text-lg mb-2 mt-4">
+            Student Profile Photo
+        </h3>
+
+        <input
+            type="file"
+            name="photo"
+            accept="image/*"
+            class="w-full border p-3 mb-4 rounded"
+        >
+
+        <!-- Attendance Days -->
 
         <h3 class="font-bold text-lg mb-2 mt-4">
             Attendance Days

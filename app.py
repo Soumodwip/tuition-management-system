@@ -1,3 +1,5 @@
+from werkzeug.utils import secure_filename
+import os
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
@@ -129,10 +131,25 @@ def add_student():
         username = request.form["username"]
         password = request.form["password"]
 
-        # Attendance days from checkboxes
         attendance_days = ",".join(
             request.form.getlist("attendance_days")
         )
+
+        # Photo Upload
+        photo = request.files.get("photo")
+
+        filename = None
+
+        if photo and photo.filename:
+
+            filename = secure_filename(photo.filename)
+
+            photo.save(
+                os.path.join(
+                    "static/student_photos",
+                    filename
+                )
+            )
 
         cursor = db.cursor()
 
@@ -146,9 +163,10 @@ def add_student():
                 email,
                 username,
                 password,
-                attendance_days
+                attendance_days,
+                photo
             )
-            VALUES (%s,%s,%s,%s,%s,%s,%s)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
             """,
             (
                 name,
@@ -157,7 +175,8 @@ def add_student():
                 email,
                 username,
                 password,
-                attendance_days
+                attendance_days,
+                filename
             )
         )
 
@@ -175,6 +194,13 @@ def edit_student(id):
 
     cursor = db.cursor()
 
+    cursor.execute(
+        "SELECT * FROM students WHERE id=%s",
+        (id,)
+    )
+
+    student = cursor.fetchone()
+
     if request.method == "POST":
 
         name = request.form["name"]
@@ -186,6 +212,23 @@ def edit_student(id):
             request.form.getlist("attendance_days")
         )
 
+        # Current photo
+        filename = student[8]
+
+        # New photo upload
+        photo = request.files.get("photo")
+
+        if photo and photo.filename:
+
+            filename = secure_filename(photo.filename)
+
+            photo.save(
+                os.path.join(
+                    "static/student_photos",
+                    filename
+                )
+            )
+
         cursor.execute(
             """
             UPDATE students
@@ -194,7 +237,8 @@ def edit_student(id):
             class_name=%s,
             phone=%s,
             email=%s,
-            attendance_days=%s
+            attendance_days=%s,
+            photo=%s
             WHERE id=%s
             """,
             (
@@ -203,6 +247,7 @@ def edit_student(id):
                 phone,
                 email,
                 attendance_days,
+                filename,
                 id
             )
         )
@@ -211,18 +256,10 @@ def edit_student(id):
 
         return redirect("/students")
 
-    cursor.execute(
-        "SELECT * FROM students WHERE id=%s",
-        (id,)
-    )
-
-    student = cursor.fetchone()
-
     return render_template(
         "edit_student.html",
         student=student
     )
-
 
 # Delete Student
 @app.route("/delete-student/<int:id>")
