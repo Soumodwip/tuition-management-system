@@ -30,11 +30,75 @@
 
 <div class="max-w-5xl mx-auto mt-6 md:mt-10 px-4">
 
+    <!-- Attendance Notification -->
+
+    {% if today_attendance %}
+
+    <div class="mb-6 p-5 rounded-lg shadow
+
+    {% if today_attendance[0] == 'Present' %}
+    bg-green-100 border-l-4 border-green-500
+    {% elif today_attendance[0] == 'Absent' %}
+    bg-red-100 border-l-4 border-red-500
+    {% else %}
+    bg-yellow-100 border-l-4 border-yellow-500
+    {% endif %}
+    ">
+
+        <h2 class="text-2xl font-bold mb-3">
+            🔔 Today's Attendance Status
+        </h2>
+
+        <p class="mb-2">
+            <strong>Date:</strong> {{ attendance_date }}
+        </p>
+
+        <p class="mb-4">
+            <strong>Day:</strong> {{ attendance_day }}
+        </p>
+
+        {% if today_attendance[0] == "Present" %}
+
+        <p class="text-green-700 font-bold text-lg">
+            ✅ Your teacher marked you PRESENT today.
+        </p>
+
+        <p class="text-green-600 mt-2">
+            Excellent! Keep attending classes regularly.
+        </p>
+
+        {% elif today_attendance[0] == "Absent" %}
+
+        <p class="text-red-700 font-bold text-lg">
+            ❌ Your teacher marked you ABSENT today.
+        </p>
+
+        <p class="text-red-600 mt-2">
+            Please contact your teacher if this attendance is incorrect.
+        </p>
+
+        {% else %}
+
+        <p class="text-yellow-700 font-bold text-lg">
+            ⏰ Your teacher marked you LATE today.
+        </p>
+
+        <p class="text-yellow-600 mt-2">
+            Please try to arrive on time next class.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
     <!-- Announcement Notice -->
+
     <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded mb-6">
 
         <h2 class="font-bold text-yellow-800">
-            🔔 New Announcements Available
+            📢 New Announcements Available
         </h2>
 
         <p class="text-yellow-700">
@@ -42,6 +106,8 @@
         </p>
 
     </div>
+
+    <!-- Student Info Card -->
 
     <div class="bg-white p-6 md:p-8 rounded shadow">
 
@@ -66,7 +132,8 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
 
             <a href="/pay-fee"
                class="bg-green-600 text-white p-4 rounded text-center hover:bg-green-700">
@@ -76,6 +143,11 @@
             <a href="/my-payments"
                class="bg-blue-600 text-white p-4 rounded text-center hover:bg-blue-700">
                 My Payments
+            </a>
+
+            <a href="/student-attendance"
+               class="bg-indigo-600 text-white p-4 rounded text-center hover:bg-indigo-700">
+                Attendance
             </a>
 
             <a href="/student-announcements"

@@ -287,6 +287,8 @@ def student_login():
         error=error
     )
 # Student Dashboard
+from datetime import datetime
+
 @app.route("/student-dashboard")
 def student_dashboard():
 
@@ -305,11 +307,40 @@ def student_dashboard():
 
     student = cursor.fetchone()
 
-    return render_template(
-        "student_dashboard.html",
-        student=student
+    # Get latest attendance record
+    cursor.execute(
+        """
+        SELECT status, attendance_date
+        FROM attendance
+        WHERE student_id=%s
+        ORDER BY id DESC
+        LIMIT 1
+        """,
+        (session["student_id"],)
     )
 
+    today_attendance = cursor.fetchone()
+
+    attendance_date = None
+    attendance_day = None
+
+    if today_attendance:
+
+        attendance_date = today_attendance[1].strftime(
+            "%d %B %Y"
+        )
+
+        attendance_day = today_attendance[1].strftime(
+            "%A"
+        )
+
+    return render_template(
+        "student_dashboard.html",
+        student=student,
+        today_attendance=today_attendance,
+        attendance_date=attendance_date,
+        attendance_day=attendance_day
+    )
 
 # Pay Fee
 @app.route("/pay-fee", methods=["GET", "POST"])
@@ -569,13 +600,21 @@ def attendance():
 
     students = cursor.fetchall()
 
+    success_message = session.pop(
+        "success_message",
+        None
+    )
+
     return render_template(
         "attendance.html",
-        students=students
+        students=students,
+        success_message=success_message
     )
 
 
 # Mark Attendance
+from datetime import datetime
+
 @app.route("/mark-attendance", methods=["POST"])
 def mark_attendance():
 
@@ -587,6 +626,16 @@ def mark_attendance():
 
     cursor = db.cursor()
 
+    # Get student name
+    cursor.execute(
+        "SELECT name FROM students WHERE id=%s",
+        (student_id,)
+    )
+
+    student = cursor.fetchone()
+    student_name = student[0]
+
+    # Save attendance
     cursor.execute(
         """
         INSERT INTO attendance
@@ -597,6 +646,14 @@ def mark_attendance():
     )
 
     db.commit()
+
+    today_date = datetime.now().strftime("%d %B %Y")
+    today_day = datetime.now().strftime("%A")
+
+    session["success_message"] = (
+        f"{student_name} has been marked {status} successfully on "
+        f"{today_date} ({today_day})"
+    )
 
     return redirect("/attendance")
 

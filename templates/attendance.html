@@ -37,6 +37,23 @@
         Attendance Management
     </h1>
 
+    <!-- Success Message -->
+    {% if success_message %}
+
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-5 rounded-lg mb-6 shadow">
+
+        <h2 class="text-xl font-bold">
+            ✅ Attendance Saved Successfully
+        </h2>
+
+        <p class="mt-2">
+            {{ success_message }}
+        </p>
+
+    </div>
+
+    {% endif %}
+
     <div class="bg-white rounded-lg shadow overflow-hidden">
 
         <table class="w-full">
@@ -95,7 +112,7 @@
                     <td class="p-4">
 
                         <button
-                            class="bg-green-600 text-white px-4 py-2 rounded">
+                            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
                             Save
                         </button>
 
