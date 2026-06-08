@@ -144,9 +144,20 @@ def add_student():
 
             filename = secure_filename(photo.filename)
 
+            upload_folder = os.path.join(
+                app.root_path,
+                "static",
+                "student_photos"
+            )
+
+            os.makedirs(
+                upload_folder,
+                exist_ok=True
+            )
+
             photo.save(
                 os.path.join(
-                    "static/student_photos",
+                    upload_folder,
                     filename
                 )
             )
@@ -212,19 +223,29 @@ def edit_student(id):
             request.form.getlist("attendance_days")
         )
 
-        # Current photo
+        # Keep old photo by default
         filename = student[8]
 
-        # New photo upload
         photo = request.files.get("photo")
 
-        if photo and photo.filename:
+        if photo and photo.filename != "":
 
             filename = secure_filename(photo.filename)
 
+            upload_folder = os.path.join(
+                app.root_path,
+                "static",
+                "student_photos"
+            )
+
+            os.makedirs(
+                upload_folder,
+                exist_ok=True
+            )
+
             photo.save(
                 os.path.join(
-                    "static/student_photos",
+                    upload_folder,
                     filename
                 )
             )
@@ -233,12 +254,12 @@ def edit_student(id):
             """
             UPDATE students
             SET
-            name=%s,
-            class_name=%s,
-            phone=%s,
-            email=%s,
-            attendance_days=%s,
-            photo=%s
+                name=%s,
+                class_name=%s,
+                phone=%s,
+                email=%s,
+                attendance_days=%s,
+                photo=%s
             WHERE id=%s
             """,
             (
@@ -260,6 +281,7 @@ def edit_student(id):
         "edit_student.html",
         student=student
     )
+
 
 # Delete Student
 @app.route("/delete-student/<int:id>")
