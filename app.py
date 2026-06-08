@@ -599,12 +599,16 @@ def attendance():
 
     students = cursor.fetchall()
 
+    success_message = session.pop(
+        "success_message",
+        None
+    )
+
     return render_template(
         "attendance.html",
         students=students,
-        success_message="TEST MESSAGE FROM ATTENDANCE PAGE"
+        success_message=success_message
     )
-
 # Mark Attendance
 from datetime import datetime
 
